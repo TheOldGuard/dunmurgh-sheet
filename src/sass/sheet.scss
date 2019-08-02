@@ -69,7 +69,13 @@ input[type=number] {
 
 .sheet-filtered-box {
   /* By default, display no items of a filter box */
-  display: none;
+  display: block;
+  height: 0;
+  max-height: 0;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.35s;
+  transition-timing-function: ease-in;
 }
 
 .sheet-filtered .repcontainer .repitem {

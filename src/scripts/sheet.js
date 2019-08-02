@@ -17,9 +17,17 @@ const moveTypes = {
     advanced: 4
 }
 
+const moveDoneOptions = {
+    clear: 0,
+    red: 1,
+    green: 2,
+    gold: 3
+};
+
 var dunmurghMoves = {
     gainTheUpperHand: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.green,
         name: 'Gain the Upper Hand',
         trigger: 'When you maneuver to gain an advantage in a conflict,  describe how and roll +Affinity',
          rolltype: '@{statmod_query}',
@@ -30,6 +38,7 @@ var dunmurghMoves = {
     },
     pressTheAdvantage: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.green,
         name: 'Press the Advantage',
         trigger: 'When you exploit an advantage in a conflict, describe how and roll +Affinity',
         rolltype: '@{statmod_query}',
@@ -40,6 +49,7 @@ var dunmurghMoves = {
     },
     compelAResolution: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.red,
         name: 'Compel A Resolution',
         trigger: 'When you attempt to compel a resolution to a conflict with an opponent who may be inclined to acquiesce roll +something (threat of harm, harm already done, leverage an asset, affinity or raw will).',
         rolltype: '0',
@@ -49,6 +59,7 @@ var dunmurghMoves = {
     },
     sufferHarm: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.green,
         name: 'Suffer Harm',
         trigger: 'When you suffer Harm, describe how you want to divide Harm between Stress and Trauma, then roll +Harm (Minor: 1, Severe: 2, Lethal: 3, Overwhelming: 4).',
         rolltype: '0',
@@ -79,6 +90,7 @@ var dunmurghMoves = {
     },
     breakUnderPressure: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.red,
         name: 'Break Under Pressure',
         trigger: 'When you fill your last stress slot Suffer Harm as normal and roll Challenge Dice vs Resolve.',
         rolltype: '0',
@@ -92,6 +104,7 @@ var dunmurghMoves = {
     },
     unearthTheAwfulTruth: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.green,
         name: 'Unearth the Awful Truth',
         trigger: 'When you attend to a situation to peel back the veneer of what is obvious roll +Affinity and describe what you do.',
         rolltype: '@{statmod_query}',
@@ -109,6 +122,7 @@ var dunmurghMoves = {
     },
     actUnderPressure: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.red,
         name: 'Act Under Pressure',
         trigger: 'When you attempt to act despite an imminent threat, potential risk, or other calamity that may occur roll +Affinity and describe what you do.',
         rolltype: '@{statmod_query}',
@@ -117,6 +131,7 @@ var dunmurghMoves = {
     },
     spoutLore: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.green,
         name: 'Spout Lore',
         trigger: 'When you consider your knowledge, training, or expertise on a subject roll +Affinity',
         rolltype: '@{statmod_query}',
@@ -126,6 +141,7 @@ var dunmurghMoves = {
     },
     putANameToAFace: {
         type: moveTypes.core,
+        movedone: moveDoneOptions.green,
         name: 'Put A Name To A Face',
         trigger: 'When you attempt to recall who someone of note is and what you may know of them roll +Affinity.',
         rolltype: '@{statmod_query}',
@@ -151,6 +167,7 @@ function getNewMoveAttrs(move, rowid) {
         if (dunmurghMoves[move].partialhit) attrs[prefix + "partialhit"] = dunmurghMoves[move].partialhit;
         if (dunmurghMoves[move].miss) attrs[prefix + "miss"] = dunmurghMoves[move].miss;
         if (dunmurghMoves[move].details) attrs[prefix + "details"] = dunmurghMoves[move].details;
+        attrs[prefix + "movedone"] = dunmurghMoves[move].movedone || 0;
         let movetype = dunmurghMoves[move].type;
         movetype = movetype !== undefined
           ? movetype

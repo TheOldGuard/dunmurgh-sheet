@@ -1,86 +1,68 @@
 <template>
-  <div class="moves section sheet-filtered">
+  <div class="moves section filtered">
     <h3>Moves</h3>
-    <div class="sheet-filter-move-container">
+    <div class="filter-move-container">
       <label>
-        <input type="radio" name="attr_move_filter_shown" value="0" checked="checked" /> All
+        <span class="tab"></span>
       </label>
       <label>
-        <input type="radio" name="attr_move_filter_shown" value="1" /> Core
+        <input type="radio" name="attr_move_filter_shown" value="0" checked="checked" />
+        <span class="tab">All</span>
       </label>
       <label>
-        <input type="radio" name="attr_move_filter_shown" value="2" /> Periph.
+        <input type="radio" name="attr_move_filter_shown" value="1" />
+        <span class="tab">Core</span>
       </label>
       <label>
-        <input type="radio" name="attr_move_filter_shown" value="3" /> Basic
+        <input type="radio" name="attr_move_filter_shown" value="2" />
+        <span class="tab">Periph.</span>
       </label>
       <label>
-        <input type="radio" name="attr_move_filter_shown" value="4" /> Adv.
+        <input type="radio" name="attr_move_filter_shown" value="3" />
+        <span class="tab">Basic</span>
+      </label>
+      <label>
+        <input type="radio" name="attr_move_filter_shown" value="4" />
+        <span class="tab">Adv.</span>
+      </label>
+      <label>
+        <span class="tab"></span>
       </label>
     </div>
     <form novalidate="novalidate">
-      <input
-        type="radio"
-        name="attr_move_filter"
-        class="sheet-hidden sheet-move-filter-all"
-        value="0"
-      />
-      <input
-        type="radio"
-        name="attr_move_filter"
-        class="sheet-hidden sheet-move-filter-core"
-        value="1"
-      />
-      <input
-        type="radio"
-        name="attr_move_filter"
-        class="sheet-hidden sheet-move-filter-peripheral"
-        value="2"
-      />
-      <input
-        type="radio"
-        name="attr_move_filter"
-        class="sheet-hidden sheet-move-filter-basic"
-        value="3"
-      />
-      <input
-        type="radio"
-        name="attr_move_filter"
-        class="sheet-hidden sheet-move-filter-advanced"
-        value="4"
-      />
+      <input type="radio" name="attr_move_filter" class="hidden move-filter-all" value="0" />
+      <input type="radio" name="attr_move_filter" class="hidden move-filter-core" value="1" />
+      <input type="radio" name="attr_move_filter" class="hidden move-filter-peripheral" value="2" />
+      <input type="radio" name="attr_move_filter" class="hidden move-filter-basic" value="3" />
+      <input type="radio" name="attr_move_filter" class="hidden move-filter-advanced" value="4" />
       <fieldset class="repeating_move">
-        <input
-          type="text"
-          class="sheet-vanish sheet-movetype-core"
-          name="attr_movetype_core"
-          required
-        />
-        <input
-          type="text"
-          class="sheet-vanish sheet-movetype-peripheral"
-          name="attr_movetype_peripheral"
-          required="required"
-        />
-        <input
-          type="text"
-          class="sheet-vanish sheet-movetype-basic"
-          name="attr_movetype_basic"
-          required="required"
-        />
-        <input
-          type="text"
-          class="sheet-vanish sheet-movetype-advanced"
-          name="attr_movetype_advanced"
-          required="required"
-        />
+        <input type="radio" class="vanish movetype-core" name="attr_movetype_shown" value="1" />
+        <input type="radio" class="vanish movetype-peripheral" name="attr_movetype_shown" value="2" />
+        <input type="radio" class="vanish movetype-basic" name="attr_movetype_shown" value="3" />
+        <input type="radio" class="vanish movetype-advanced" name="attr_movetype_shown" value="4" />
+        <!-- Move Done hidden radio -->
+        <input type="radio" class="vanish movedone-clear" name="attr_movedone" value="0" />
+        <input type="radio" class="vanish movedone-red" name="attr_movedone" value="1" />
+        <input type="radio" class="vanish movedone-green" name="attr_movedone" value="2" />
+        <input type="radio" class="vanish movedone-gold" name="attr_movedone" value="3" />
+        <!-- Edit button -->
         <input class="edit-move" type="checkbox" name="attr_editmove" checked="checked" />
         <span class="editing">p</span>
-        <div class="move-entry sheet-filtered-box">
-          <span class="sheet-movetype-display sheet-movetype-advanced-display">Adv.</span>
-          <span class="sheet-movetype-display sheet-movetype-core-display">Core</span>
-          <span class="sheet-movetype-display sheet-movetype-peripheral-display">Per.</span>
-          <span class="sheet-movetype-display sheet-movetype-basic-display">Basic</span>
+
+        <div class="move-entry filtered-box">
+          <!-- Move Done indicator -->
+          <span class="movedone-display movedone-red-display"></span>
+          <span class="movedone-display movedone-green-display"></span>
+          <span class="movedone-display movedone-gold-display"></span>
+
+          <!-- Move type indicator -->
+          <span class="movetype-display movetype-core-display">Core</span>
+          <span class="movetype-display movetype-peripheral-display">Per.</span>
+          <span class="movetype-display movetype-basic-display">Basic</span>
+          <span class="movetype-display movetype-advanced-display">Adv.</span>
+          <span class="movetype-display movetype-core-display">Core</span>
+          <span class="movetype-display movetype-peripheral-display">Per.</span>
+          <span class="movetype-display movetype-basic-display">Basic</span>
           <div class="editing-move">
             <div class="move-first-row">
               <input name="attr_movename" type="text" placeholder="Move Name" />
@@ -110,6 +92,15 @@
                 <option value="2">Peripheral</option>
                 <option value="3">Basic</option>
                 <option value="4">Advanced</option>
+              </select>
+            </label>
+            <label>
+              Move Done Status
+              <select name="attr_movedone">
+                <option value="0" selected>Neutral</option>
+                <option value="1">Needs Major Attention</option>
+                <option value="2">Neads Minor Tweaking</option>
+                <option value="3">Done</option>
               </select>
             </label>
             <label>Full Hit</label>
@@ -143,8 +134,12 @@
 
 <style lang="scss">
 .sheet-moves {
-  padding: 1.5em;
+  padding: 0;
   border-top: 1px solid black;
+  h3,
+  .repcontainer {
+    padding: 0.5em;
+  }
 }
 
 .sheet-moves > fieldset.repeating_move + .repcontainer > .repitem {
@@ -185,37 +180,16 @@
   + .repcontainer
   > .repitem
   input.sheet-movetype-advanced:checked
-  ~ .sheet-filtered-box,
-.sheet-move-filter-all:checked
-  ~ fieldset.repeating_move
-  + .repcontainer
-  > .repitem
-  .sheet-filtered-box,
-.sheet-move-filter-core:checked
-  ~ fieldset.repeating_move
-  + .repcontainer
-  > .repitem
-  input.sheet-movetype-core:valid
-  ~ .sheet-filtered-box,
-.sheet-move-filter-peripheral:checked
-  ~ fieldset.repeating_move
-  + .repcontainer
-  > .repitem
-  input.sheet-movetype-peripheral:valid
-  ~ .sheet-filtered-box,
-.sheet-move-filter-basic:checked
-  ~ fieldset.repeating_move
-  + .repcontainer
-  > .repitem
-  input.sheet-movetype-basic:valid
-  ~ .sheet-filtered-box,
-.sheet-move-filter-advanced:checked
-  ~ fieldset.repeating_move
-  + .repcontainer
-  > .repitem
-  input.sheet-movetype-advanced:valid
   ~ .sheet-filtered-box {
   display: block;
+  height: auto;
+  opacity: 1;
+  margin: 1%;
+  width: 98%;
+  max-height: 100%;
+  border: 1px solid black;
+  padding: 0.6em;
+  padding-left: 1.7em;
 }
 
 .sheet-moves {
@@ -225,8 +199,6 @@
     .repitem {
       width: 100%;
       .sheet-filtered-box {
-        margin: 1%;
-        width: 98%;
         box-sizing: border-box;
         position: relative;
       }
@@ -234,10 +206,7 @@
   }
 
   .sheet-move-entry {
-    border: 1px solid black;
     border-radius: 0.5em;
-    padding: 0.6em;
-    padding-left: 1.7em;
   }
 }
 
@@ -273,14 +242,51 @@
   top: 0;
 }
 
-.sheet-movetype-core:valid ~ .sheet-move-entry > .sheet-movetype-core-display,
-.sheet-movetype-peripheral:valid
+.sheet-movetype-core:checked ~ .sheet-move-entry > .sheet-movetype-core-display,
+.sheet-movetype-peripheral:checked
   ~ .sheet-move-entry
   > .sheet-movetype-peripheral-display,
-.sheet-movetype-basic:valid ~ .sheet-move-entry > .sheet-movetype-basic-display,
-.sheet-movetype-advanced:valid
+.sheet-movetype-basic:checked
+  ~ .sheet-move-entry
+  > .sheet-movetype-basic-display,
+.sheet-movetype-advanced:checked
   ~ .sheet-move-entry
   > .sheet-movetype-advanced-display {
+  display: block;
+}
+
+.sheet-movedone-display {
+  $size: 1.5em;
+  $radius: $size / 2;
+  display: none;
+  position: absolute;
+  width: $size;
+  min-width: $size;
+  height: $size;
+  min-height: $size;
+  border-radius: $radius;
+  left: -0.4em;
+  top: -0.4em;
+  border: 1px solid black;
+
+  &.sheet-movedone-red-display {
+    background-color: #f00;
+  }
+  &.sheet-movedone-green-display {
+    background-color: #090;
+  }
+  &.sheet-movedone-gold-display {
+    background-color: #ffd700;
+  }
+}
+
+.sheet-movedone-red:checked ~ .sheet-move-entry > .sheet-movedone-red-display,
+.sheet-movedone-green:checked
+  ~ .sheet-move-entry
+  > .sheet-movedone-green-display,
+.sheet-movedone-gold:checked
+  ~ .sheet-move-entry
+  > .sheet-movedone-gold-display {
   display: block;
 }
 
@@ -335,8 +341,67 @@
 
 .sheet-filter-move-container {
   display: flex;
-  label {
+  > label {
+    position: relative;
     flex: 1;
+    margin: 0;
+    padding: 0;
+
+    span.sheet-tab {
+      display: block;
+      height: 100%;
+      width: 100%;
+      min-width: 100%;
+      min-height: 100%;
+      padding: 0.25em;
+      box-sizing: border-box;
+      text-align: center;
+      border-radius: 0.5em 0.5em 0 0;
+      border-bottom: 1px solid black;
+    }
+
+    > input {
+      width: 100%;
+      position: absolute;
+      height: 3em;
+      max-height: 2em;
+      min-height: 2em;
+      opacity: 0;
+      z-index: 1;
+
+      $inactive: #999;
+
+      + span.sheet-tab {
+        border-left: 1px solid $inactive;
+        border-top: 1px solid $inactive;
+        border-right: 1px solid $inactive;
+        color: $inactive;
+      }
+
+      &:checked + span.sheet-tab {
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: none;
+        color: black;
+      }
+    }
+  }
+}
+
+.sheet-moves .repcontainer .repitem .itemcontrol {
+  .repcontrol_move {
+    float: none;
+    position: absolute;
+    z-index: 1000;
+    bottom: 0.1em;
+  }
+
+  .btn.btn-danger.pictos.repcontrol_del {
+    z-index: 1000;
+    position: absolute;
+    right: 0em;
+    bottom: 0.1em;
   }
 }
 </style>
