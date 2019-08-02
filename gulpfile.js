@@ -6,6 +6,7 @@ const gulp = require("gulp"),
   through2 = require("through2"),
   transform = require("gulp-transform"),
   concat = require("gulp-concat"),
+  clean = require('gulp-clean'),
   pi = require('pipe-iterators'),
   streamToPromise = require("stream-to-promise"),
   connect = require('gulp-connect'),
@@ -298,9 +299,22 @@ function build() {
 }
 exports.build = build;
 
+function cleanDist() {
+  return gulp.src('./dist/*.*')
+    .pipe(clean());
+}
+exports.clean = cleanDist;
+
+let cleanBuild = gulp.series(
+  cleanDist,
+  build
+)
+exports.cleanBuild = cleanBuild;
+
+
 function watchEverything() {
   console.log('watching everything');
-  return gulp.watch(['./src/*','./src/**/*', './src/shell/*'], build);
+  return gulp.watch(['./src/*','./src/**/*', './src/shell/*'], cleanBuild);
 }
 exports.watch = watchEverything;
 
@@ -315,7 +329,7 @@ function devServer() {
 exports.devServer = devServer;
 
 exports.default = gulp.series(
-    build,
+    cleanBuild,
     gulp.parallel(
       watchEverything,
       devServer
