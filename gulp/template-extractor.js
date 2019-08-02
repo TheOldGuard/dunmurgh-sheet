@@ -52,24 +52,18 @@ class TemplateExtractor {
     if (illegalTags.indexOf(tag) > -1){
       tag = sReverse(tag);
     }
-    console.log('looking for',tag);
     let $el = this._$(tag);
     let $elArr = $el.toArray();
       if($elArr.length && $elArr.length > 1){
-        console.log('found more than one');
-        console.log('$elArr',$elArr);
-        
         let out = $elArr.map((item) => {
           let rendered = includeOuter ? item : item.contents();
           html = self._$.html(rendered);
-          console.log('html',html);
           return unescapeIllegals(html);
         });
         return out
       }
       let rendered = includeOuter ? $el.get() : $el.contents();
           html = this._$.html(rendered);
-    console.log('html',html);
     return unescapeIllegals(html);
   }
 }
