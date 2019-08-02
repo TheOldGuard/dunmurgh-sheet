@@ -266,14 +266,14 @@ function processSheet({html, js, css}) {
     return Promise.all([sheetPromise, cssPromise])
       .then(([rawHtml, css]) => {
         let sheetStream = 
-            gulp.src('./src/shell/index.html')
+            gulp.src('./src-shell/index.html')
               .pipe(transform((contents, file) => {
                 let html = _.escape(rawHtml),
                     template = _.template(contents);
                 return template({html, css});
               }, 'utf8'))
               .pipe(gulp.dest('./dist/'));
-        let shellCssStream = gulp.src(['./src/shell/shell.scss'])
+        let shellCssStream = gulp.src(['./src-shell/shell.scss'])
               .pipe(gulpSass().on('error',gulpSass.logError))
               .pipe(gulp.dest('./dist/'));
 
@@ -314,7 +314,7 @@ exports.cleanBuild = cleanBuild;
 
 function watchEverything() {
   console.log('watching everything');
-  return gulp.watch(['./src/*','./src/**/*', './src/shell/*'], cleanBuild);
+  return gulp.watch(['./src/*','./src/**/*', './src-shell/*'], cleanBuild);
 }
 exports.watch = watchEverything;
 
