@@ -9,71 +9,115 @@
         <title>Roll20 Sheet Helper</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/themes/prism-coy.min.css">
+
+        <!-- JQuery needed for Bootstrap and population -->
+        <script src="http://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
+        <!-- Bootstrap for tabs, and maybe future prettiness -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <!-- Prism - code highlighting -->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/themes/prism-okaidia.css">
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+
+        <!-- Clipboard.js for the code copying -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+        <!-- lodash for unescaping said code -->
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+
+        <!-- Finally, custom styles -->
         <link rel="stylesheet" href="shell.css">
     </head>
     <body>
-        <div class="container">
-        <div class="sheet-part">
-            <h2>
-                HTML
-            </h2>
-                <div class="code-container">
-                    <button class="btn" data-clipboard-target="#html-container">
-                        <i class="material-icons">
-                                file_copy
-                                </i>
-                    </button>
-                    <pre>
-                        <code class="language-html">${ html }</code>
-                    </pre>
-                    <pre class="hidden" id="html-container">
-                        ${html}
-                    </pre>
-                </div>
-
-            <!-- Trigger -->
-        </div>
-
-        <div class="sheet-part">
-            <h2>CSS</h2>
-            <div class="code-container">
-            <button class="btn" data-clipboard-target="#css-container">
-                        <i class="material-icons">
-                                file_copy
-                                </i>
-            </button>
-                <pre>
-                    <code class="language-css">${ css }</code>
-                </pre>
-                <pre class="hidden" id="css-container">
-                    ${css}
-                </pre>
-
-            </div>
-
-            <!-- Trigger -->
-        </div>
-
-        </div>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+    <div class="container">
         
-        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
-        <script src="http://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
-        <script>
-            new ClipboardJS('.btn', {
-                text: function(trigger) {
-                    let target = trigger.getAttribute('data-clipboard-target'),
-                        txt = _.unescape($(target).html());
-                    return txt;
-                }
+        <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#html" aria-controls="html" role="tab" data-toggle="tab">HTML Layout</a>
+                </li>
+                <li role="presentation">
+                    <a href="#css" aria-controls="css" role="tab" data-toggle="tab">CSS Styling</a>
+                </li>
+            </ul>
+        
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="html">
+                    <div class="code-container">
+                        <div id="html-tooltip" class="tooltip right" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner">Copied!</div>
+                        </div>
+                        <button class="btn btn-default" data-clipboard-target="#html">
+                            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                        </button>
+                        <pre>
+                            <code id="html-display" class="language-html"></code>
+                        </pre>
+                        <pre class="hidden" id="html-container">
+${html}
+                        </pre>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="css">
+                    <div class="code-container">
+                        <div id="css-tooltip" class="tooltip right" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner">Copied!</div>
+                        </div>
+                    <button class="btn btn-default" data-clipboard-target="#css">
+                            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                    </button>
+                        <pre>
+                            <code id="css-display" class="language-css"></code>
+                        </pre>
+                        <pre class="hidden" id="css-container">
+${css}
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    $(() => {
+        ['html','css'].forEach(item => {
+            let $container = $('#'+item+'-container'),
+                $display = $('#'+item+'-display');
+            $display.html($container.html().trim());
+            Prism.plugins.NormalizeWhitespace.setDefaults({
+                'remove-trailing': true,
+                'remove-indent': true,
+                'left-trim': true,
+                'right-trim': true,
+                /*'break-lines': 80,
+                'indent': 2,
+                'remove-initial-line-feed': false,
+                'tabs-to-spaces': 4,
+                'spaces-to-tabs': 4*/
             });
-        </script>
-    </body>
+            Prism.highlightAll();
+        });
+    });
+    new ClipboardJS('.btn', {
+        text: function(trigger) {
+            let target = trigger.getAttribute('data-clipboard-target'),
+                txt = _.unescape($(target+`-container`).html()).trim(),
+                $tooltip = $(target+`-tooltip`);
+            $tooltip.css({opacity: 1});
+            setTimeout(() => $tooltip.css({opacity:0}),2000);
+            return txt;
+        }
+    });
+</script>
+</body>
 </html>

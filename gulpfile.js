@@ -77,12 +77,10 @@ function cloneWithNewContentsAndExtension(file, contents, ext) {
 
 function splitVue() {
   return through2.obj((file, __, cb) => {
-    console.log('spinning up a TemplateExtractor');
     let extractor = new TemplateExtractor(file.contents.toString()),
       template = getElementOrEmpty(extractor, 'template'), 
       script = getElementOrEmpty(extractor, 'script'),
       style = getElementOrEmpty(extractor, 'style');
-    console.log('I did it?');
     let templateFile = cloneWithNewContentsAndExtension(file, template, '.html'),
       scriptFile = cloneWithNewContentsAndExtension(file, script, '.js'),
       styleFile = cloneWithNewContentsAndExtension(file, style, '.scss');
@@ -294,10 +292,6 @@ function build() {
     return processRollTemplates()
       .then(processSheet)
       .then(files => {
-        files.forEach(f => {
-          if (f.basename.indexOf('.html') > 0){
-            console.log(f.contents.toString())
-          }});
         return pi.fromArray(files)
           .pipe(connect.reload());
       });
