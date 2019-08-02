@@ -1,0 +1,112 @@
+@mixin rollTemplate($template-name) {
+    .sheet-rolltemplate-#{$template-name} {
+        table {
+            width: 100%;
+            /*border: 1px solid;*/
+            color: #333;
+            font-size: 1em;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            margin: 0px;
+            border-radius: 5px;
+
+            > {
+                thead>tr>th, 
+                tbody>tr>th, 
+                tfoot>tr>th, 
+                thead>tr>td, 
+                tbody>tr>td, 
+                tfoot>tr>td {
+                    padding: 10px 4px;
+                    border: none; 
+                }
+
+                tbody>tr.sheet-less-top-padding>td,
+                tbody>tr.sheet-less-top-padding>th {
+                    padding: 4px;
+                    border: none; 
+                }
+
+            }
+
+            tr {
+                border-bottom: 1px solid black;
+
+                &:last-child,
+                &.sheet-no-border {
+                    border-bottom: none;
+                }
+            }
+
+        }
+
+        th {
+            padding: 2px;
+            /*border-bottom: 1px solid black;*/
+            line-height: 1.2em;
+            font-weight:bold;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+
+
+        .sheet-rolltable-container {
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 7px;
+            padding: 0.5em;
+        }
+
+        .sheet-subheader {
+            line-height: 0.9em;
+            font-size: 0.9em;
+            font-variant: small-caps;
+            font-style: italic;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .sheet-subfooter {
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .sheet-partial-hit {
+            color: blue;
+        }
+        .sheet-full-hit {
+            color: darkgreen;
+        }
+        .sheet-miss {
+            color: firebrick;
+        }
+        .sheet-opportunity {
+            color: green;
+        }
+        .sheet-complication {
+            color: red;
+        }
+    
+        .userscript-tcat {
+            font-weight: bold;
+        }
+    
+        .inlinerollresult  {
+            display: inline-block;
+            min-width: 1.5em;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #555;
+            background: transparent;
+        }
+    
+        .inlinerollresult.fullcrit,
+        .inlinerollresult.fullfail {
+            border: none;
+            border-bottom: 1px solid #555;
+            background: transparent;
+        }
+
+    }
+}

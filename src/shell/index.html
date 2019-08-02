@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Roll20 Sheet Helper</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/themes/prism-coy.min.css">
+        <link rel="stylesheet" href="shell.css">
+    </head>
+    <body>
+        <div class="container">
+        <div class="sheet-part">
+            <h2>
+                HTML
+            </h2>
+                <div class="code-container">
+                    <button class="btn" data-clipboard-target="#html-container">
+                        <i class="material-icons">
+                                file_copy
+                                </i>
+                    </button>
+                    <pre>
+                        <code class="language-html">${ html }</code>
+                    </pre>
+                    <pre class="hidden" id="html-container">
+                        ${html}
+                    </pre>
+                </div>
+
+            <!-- Trigger -->
+        </div>
+
+        <div class="sheet-part">
+            <h2>CSS</h2>
+            <div class="code-container">
+            <button class="btn" data-clipboard-target="#css-container">
+                        <i class="material-icons">
+                                file_copy
+                                </i>
+            </button>
+                <pre>
+                    <code class="language-css">${ css }</code>
+                </pre>
+                <pre class="hidden" id="css-container">
+                    ${css}
+                </pre>
+
+            </div>
+
+            <!-- Trigger -->
+        </div>
+
+        </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+        <script src="http://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script>
+            new ClipboardJS('.btn', {
+                text: function(trigger) {
+                    let target = trigger.getAttribute('data-clipboard-target'),
+                        txt = _.unescape($(target).html());
+                    return txt;
+                }
+            });
+        </script>
+    </body>
+</html>

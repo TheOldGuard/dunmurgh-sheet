@@ -1,0 +1,46 @@
+// this is a scss file.
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 5em;
+    display: flex;
+
+    .sheet-part {
+        margin: 1%;
+        width: 48%;
+        box-sizing: border-box;
+        position: relative;
+        
+        .btn {
+            position: absolute;
+            z-index: 1000;
+            top: 8.8em;
+            right: 1.4em;
+            background: none;
+            border: none;
+            cursor: pointer;
+            background: white;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    }
+}
+
+pre {
+    width: 100%;
+    max-width: 100%;
+    height: 20em;
+    max-height: 20em;
+    padding: 0;
+    overflow: scroll;
+}
+
+pre.hidden {
+    display: none;
+}
+

@@ -1,0 +1,33 @@
+{
+  "name": "dunmurgh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sheet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "0.22.0",
+    "dom-parser": "^0.1.6",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.7.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-transform": "^3.0.5",
+    "jsdom": "^15.1.1",
+    "lodash": "^4.17.15",
+    "map-stream": "0.0.7",
+    "merge2": "^1.2.3",
+    "node-sass": "^4.12.0",
+    "opn": "^6.0.0",
+    "pipe-iterators": "^1.3.0",
+    "readable-stream-clone": "^0.0.4",
+    "stream-combiner": "^0.2.2",
+    "stream-to-promise": "^2.2.0",
+    "through2": "^2",
+    "vinyl": "^2.2.0"
+  }
+}
